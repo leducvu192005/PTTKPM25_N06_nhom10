@@ -32,26 +32,5 @@ Dự án website giúp người dùng dễ dàng tìm kiếm, đăng tin cho thu
 ---
 
 ## 🗂️ Cấu trúc dự án
-
-'''
- project-root/
-├── app/
-├── bootstrap/
-├── config/
-├── database/
-│ ├── migrations/
-│ └── seeders/
-├── public/
-│ └── uploads/
-├── resources/
-│ ├── views/
-│ │ ├── home.blade.php
-│ │ ├── post.blade.php
-│ │ └── auth/
-│ └── css/ js/
-├── routes/
-│ └── web.php
-├── .env
-└── composer.json
-
+<pre lang="markdown"> ## 🗂️ Cấu trúc dự án <code> project-root/ ├── app/ ├── bootstrap/ ├── config/ ├── database/ │ ├── migrations/ │ └── seeders/ ├── public/ │ └── uploads/ ├── resources/ │ ├── views/ │ │ ├── home.blade.php │ │ ├── post.blade.php │ │ └── auth/ │ └── css/ js/ ├── routes/ │ └── web.php ├── .env └── composer.json </code> </pre>
 
