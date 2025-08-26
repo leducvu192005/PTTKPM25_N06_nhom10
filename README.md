@@ -7,15 +7,16 @@ Dự án website giúp người dùng dễ dàng tìm kiếm, đăng tin cho thu
 
 ## 🚀 Tính năng chính
 
-- 🔍 **Tìm kiếm phòng trọ** theo:
-  - Khu vực / Quận / Thành phố
-  - Giá thuê
+- 🔍 Tìm kiếm phòng trọ theo:
+  - Khu vực / Quận
+  - Khoảng giá
   - Diện tích
-- 📝 **Đăng tin cho thuê** (có ảnh)
-- 📄 **Trang chi tiết phòng trọ**
-- 👤 **Đăng ký / Đăng nhập** tài khoản
-- 🧰 **Quản lý tin đăng** (người dùng có thể sửa/xoá bài của mình)
-- (Tuỳ chọn) 💬 **Bình luận / Liên hệ**
+  - Nội thất
+- 📝 Đăng tin cho thuê phòng (có hình ảnh)
+- 👤 Đăng ký / đăng nhập người dùng
+- 📂 Quản lý tin đăng cá nhân (sửa, xoá)
+- ❤️ Yêu thích / đánh dấu phòng trọ
+- 📦 Phân trang danh sách tin
 
 ---
 
