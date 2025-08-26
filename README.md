@@ -34,11 +34,23 @@ Dự án website giúp người dùng dễ dàng tìm kiếm, đăng tin cho thu
 
 ## 🗂️ Cấu trúc dự án
 ```
-── home.blade.php
-│ │ ├── post.blade.php
-│ │ └── auth/
+project-root/
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+│ ├── migrations/
+│ └── seeders/
+├── public/
+│ └── uploads/
+├── resources/
+│ ├── views/
+│ │ ├── home.blade.php
+│ │ ├── auth/
+│ │ └── components/
+│ │ └── card.blade.php
 │ └── css/
-│ └── app.css
+│ └── style.css
 ├── routes/
 │ └── web.php
 ├── .env
