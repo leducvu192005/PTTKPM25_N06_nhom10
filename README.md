@@ -1,7 +1,7 @@
 # PTTKPM25_N06_nhom10
 Đề tài:# 🏠 Website Tìm Phòng Trọ (Laravel)
 
-Dự án website giúp người dùng dễ dàng tìm kiếm, đăng tin cho thuê và quản lý phòng trọ. Ứng dụng được xây dựng với Laravel framework, nhằm phục vụ bài tập lớn môn [Tên môn học].
+Dự án website giúp người dùng dễ dàng tìm kiếm, đăng tin cho thuê và quản lý phòng trọ. Ứng dụng được xây dựng với Laravel framework.
 
 ---
 
