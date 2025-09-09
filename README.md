@@ -31,6 +31,8 @@ Dự án website giúp người dùng dễ dàng tìm kiếm, đăng tin cho thu
 | Quản lý gói | Composer, npm       |
 
 ---
+##Phân tích yêu cầu:
+![Use Case Diagram](https://raw.githubusercontent.com/leducvu192005/PTTKPM25_N06_nhom10/main/usecase_web_tim_phong_tro.png)
 
 ## 🗂️ Cấu trúc dự án
 ```
