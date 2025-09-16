@@ -3,14 +3,15 @@
 
 Dự án website giúp người dùng dễ dàng tìm kiếm, đăng tin cho thuê và quản lý phòng trọ. Ứng dụng được xây dựng với Laravel framework.
 
-#Thành viên:
+Thành viên:#
 Lê Đức Vũ             MSV:23010608.
 
 Nguyễn Văn Trường     MSV:23010371.
 
 Nguyễn Thị Khánh Linh MSV:23016112.
 
-#Nhiệm vụ từng thành viên:
+Nhiệm vụ từng thành viên:#
+
 Backend: Nguyễn Văn Trường
 
 Fontend: Lê Đức Vũ 
