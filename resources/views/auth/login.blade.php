@@ -128,6 +128,8 @@
         <div class="social">
             <p>Hoặc</p>
             <button><i class="fa-brands fa-apple"></i> Đăng nhập với Apple</button>
+
+            
             <button><i class="fa-brands fa-google"></i> Đăng nhập với Google</button>
         </div>
         <div class="register">
