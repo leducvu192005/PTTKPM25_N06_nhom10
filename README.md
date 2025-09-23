@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 # PTTKPM25_N06_nhom10
 Đề tài:# 🏠 Website Tìm Phòng Trọ (Laravel)
