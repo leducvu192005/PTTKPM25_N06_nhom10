@@ -14,7 +14,12 @@ Route::get('/test', function () {
         'message' => 'Backend tìm phòng trọ hoạt động!'
     ]);
 });
-
+Route::get('/login', function () {
+    return view('login');
+});
+Route::get('/register', function () {
+    return view('register');
+});
 Route::get('/test-controller', [RoomController::class, 'test']);
 //routes
 Route::resource('rooms', RoomController::class);
