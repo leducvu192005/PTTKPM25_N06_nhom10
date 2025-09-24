@@ -11,8 +11,6 @@ Route::get('/', function () {
 });
 
 
-
-
 Route::get('/test-controller', [RoomController::class, 'test']);
 //routes
 Route::resource('rooms', RoomController::class);
