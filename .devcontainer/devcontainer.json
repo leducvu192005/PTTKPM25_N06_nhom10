@@ -1,0 +1,16 @@
+{
+  "name": "Laravel + MySQL (Codespaces)",
+  "image": "mcr.microsoft.com/devcontainers/php:8.3-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/mysql:1": {
+      "version": "8.0",
+      "password": "123"
+    }
+  },
+  "forwardPorts": [3306, 8000],
+  "mounts": [
+    "source=${localWorkspaceFolder}/.devcontainer/mysql-data,target=/var/lib/mysql,type=bind,consistency=cached"
+  ],
+  "postCreateCommand": "bash .devcontainer/init-db.sh",
+  "postStartCommand": "sudo service mysql start"
+}
