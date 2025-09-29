@@ -1,36 +1,21 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\BookingController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Http\Controllers\ListingController;
+use App\Http\Controllers\RoomsController;
+//rooms
+Route::resource('rooms', RoomsController::class);
 
-// Trang mặc định
-Route::get('/', function () {
-    return view('welcome');
-});
+// Trang chủ -> gọi home trong ListingController
+Route::get('/', [ListingController::class, 'home'])->name('home');
 
-
-Route::get('/test-controller', [RoomController::class, 'test']);
-//routes
-Route::resource('rooms', RoomController::class);
-Route::resource('users', UserController::class);
-Route::resource('bookings', BookingController::class);
-
-
-Route::get('/test', function () {
-    return "Test URL";
-});
-
-
-
-// Trang login
-Route::get('/login', function () {
-    return view('auth.login');
-});
-
-// Trang register
-Route::get('/register', function () {
-    return view('auth.register');
-});
-
+// Listings CRUD
+Route::resource('listings', ListingController::class);
+// Auth pages
+Route::get('/login', fn () => view('auth.login'))->name('login');
+Route::get('/register', fn () => view('auth.register'))->name('register');
+Route::get('/forgot-password', fn () => view('auth.forgot-password'))->name('password.request');
