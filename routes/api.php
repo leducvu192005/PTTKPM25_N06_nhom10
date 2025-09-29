@@ -9,3 +9,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/phong-tros', [PhongTroController::class, 'index']);
+Route::get('/phong-tros/{id}', [PhongTroController::class, 'show']);
+Route::post('/phong-tros', [PhongTroController::class, 'store']);
+Route::put('/phongtro/{id}', [PhongTroController::class, 'apiUpdate']);
+Route::delete('/phongtro/{id}', [PhongTroController::class, 'apiDestroy']);

@@ -4,28 +4,17 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PhongTroController;
 
-// Trang mặc định
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-Route::get('/test-controller', [RoomController::class, 'test']);
 //routes
 Route::resource('rooms', RoomController::class);
 Route::resource('users', UserController::class);
 Route::resource('bookings', BookingController::class);
-
-
-Route::get('/test', function () {
-    return "Test URL";
-});
-
+Route::resource('phongtro', PhongTroController::class);
 
 
 // Trang login
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('auth.login');
 });
 
