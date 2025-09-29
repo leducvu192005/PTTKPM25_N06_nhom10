@@ -2,42 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class RoomController extends Controller
 {
-    // API test
-    public function test()
-    {
-        return response()->json([
-            'message' => 'API từ RoomController hoạt động!'
+   public function index(){
+        return Room::where('status','approved')->with('images','user')->get();
+    }
+
+    public function show($id){
+        return Room::with('images','user')->findOrFail($id);
+    }
+
+    public function store(Request $request){
+        $data = $request->validate([
+            'title'=>'required',
+            'description'=>'nullable',
+            'price'=>'required|numeric',
+            'address'=>'required'
         ]);
-    }
-    // Lấy danh sách phòng
-    public function index(){
-        return response()->json(['message' => 'Danh sách phòng']);
-    }
-    //
-    public function show($id) {
-        return response()->json(['message' =>"Chi tiết phòng $id"]);
-    }
-    public function store(Request $request) {
-        return response()->json(['message' => 'Thêm phòng mới']);
+        $data['user_id'] = auth()->id();
+        $room = Room::create($data);
+        return response()->json($room);
     }
 
-    public function update(Request $request, $id) {
-        return response()->json(['message' => "Cập nhật phòng $id"]);
+    public function destroy($id){
+        $room = Room::findOrFail($id);
+        if($room->user_id != auth()->id()){
+            return response()->json(['message'=>'Unauthorized'],403);
+        }
+        $room->delete();
+        return response()->json(['message'=>'Room deleted']);
     }
-
-    public function destroy($id) {
-        return response()->json(['message' => "Xóa phòng $id"]);
-    }
-
-    public function create() {
-        return response()->json(['message' => 'Form tạo phòng (chưa cần dùng trong API)']);
-    }
-
-    public function edit($id) {
-        return response()->json(['message' => "Form chỉnh sửa phòng $id (chưa cần dùng trong API)"]);
-    }
+   
 }
