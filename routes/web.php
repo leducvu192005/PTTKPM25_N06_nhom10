@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,22 @@ Route::resource('rooms', RoomsController::class);
 
 // Trang chủ -> gọi home trong ListingController
 Route::get('/', [ListingController::class, 'home'])->name('home');
+=======
+use App\Http\Controllers\RoomController;
+
+
+
+
+// Trang login
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+// Trang register
+Route::get('/register', function () {
+    return view('auth.register');
+});
+>>>>>>> 221c0342fb3cc140a5327dd0735d302360529c26
 
 // Listings CRUD
 Route::resource('listings', ListingController::class);
