@@ -2,17 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Room extends Model
 {
-    protected $fillable = ['title', 'address', 'price', 'description', 'images'];
+    use HasFactory;
 
-    protected $casts = [
+    protected $fillable = [
+        'user_id',
+        'title',
+        'description',
+        'address',
+        'price',
+        'image_path',
+        'status', // pending, approved, rejected
     ];
 
-    public function images()
+    public function user()
     {
-        return $this->hasMany(RoomImage::class);
+        return $this->belongsTo(User::class);
     }
 }

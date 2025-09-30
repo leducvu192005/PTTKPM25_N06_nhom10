@@ -1,21 +1,57 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use App\Http\Controllers\ListingController;
-use App\Http\Controllers\RoomsController;
-//rooms
-Route::resource('rooms', RoomsController::class);
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
-// Trang chủ -> gọi home trong ListingController
-Route::get('/', [ListingController::class, 'home'])->name('home');
+// ------------------------------------
+// 1. ROUTES AUTHENTICATION (Đăng nhập/Đăng ký/Đăng xuất)
+// ------------------------------------
+Route::middleware('guest')->group(function () {
+    // Đăng ký
+    Route::get('/register', [RegisterController::class, 'create'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
 
-// Listings CRUD
-Route::resource('listings', ListingController::class);
-// Auth pages
-Route::get('/login', fn () => view('auth.login'))->name('login');
-Route::get('/register', fn () => view('auth.register'))->name('register');
-Route::get('/forgot-password', fn () => view('auth.forgot-password'))->name('password.request');
+    // Đăng nhập
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
+});
+
+// Đăng xuất (luôn cần đăng nhập)
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout')->middleware('auth');
+
+
+// ------------------------------------
+// 2. ROUTES DÀNH CHO NGƯỜI THUÊ (Public)
+// ------------------------------------
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/rooms/{id}', [HomeController::class, 'show'])->name('rooms.show'); // Chi tiết phòng
+
+
+// ------------------------------------
+// 3. ROUTES DÀNH CHO USER ĐĂNG PHÒNG (Cần đăng nhập)
+// ------------------------------------
+Route::middleware(['auth'])->group(function () {
+    // Index riêng: Danh sách phòng trọ đã đăng của User
+    Route::get('/my-rooms', [RoomController::class, 'index'])->name('rooms.index'); 
+    
+    // CRUD phòng trọ (trừ index/show)
+    Route::resource('rooms', RoomController::class)->except(['index', 'show']); 
+});
+
+
+// ------------------------------------
+// 4. ROUTES DÀNH CHO ADMIN (Cần đăng nhập VÀ phải là Admin)
+// ------------------------------------
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/pending-rooms', [AdminController::class, 'pendingRooms'])->name('pending.rooms');
+    Route::post('/approve/{id}', [AdminController::class, 'approveRoom'])->name('approve');
+    Route::delete('/reject/{id}', [AdminController::class, 'rejectRoom'])->name('reject');
+    
+    // Thêm các route quản lý user, v.v. tại đây
+});

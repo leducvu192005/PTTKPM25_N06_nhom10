@@ -2,9 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\PhongTro;
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,14 +11,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-        User::factory(5)->create();
-        PhongTro::factory(20)->create([
-        'user_id' => User::all()->random()->id
+        $this->call([
+            AdminUserSeeder::class, // Gọi Seeder Admin
         ]);
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+
+        // ĐẢM BẢO KHÔNG CÓ DÒNG NÀO GỌI Room::factory() NẾU BẠN CHƯA CÓ FACTORY
+        // Ví dụ: // Room::factory(20)->create([...])
     }
 }
