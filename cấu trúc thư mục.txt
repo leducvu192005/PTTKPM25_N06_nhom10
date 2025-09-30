@@ -1,6 +1,6 @@
 app/
 ├── Http/
-│   ├── Controllers/         # Controller gọi service
+│   ├── Controllers/         # Controller 
 │       ├── AuthController.php
 │       ├── ListingController.php
 │       └── RoomController.php
@@ -45,3 +45,4 @@ resources/
     │   └── show.blade.php
     ├── home.blade.php
     └── welcome.blade.php
+
