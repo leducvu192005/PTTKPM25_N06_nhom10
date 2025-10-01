@@ -8,8 +8,14 @@ use App\Models\Room;
 class AdminController extends Controller
 {
     public function allRooms(){
-        return Room::with('user','images')->get();
+ $rooms = Room::with('user','images')->get();
+    return view('admin.rooms.index', compact('rooms'));
     }
+public function index()
+{
+    $rooms = Room::with('user','images')->get();
+    return view('admin.rooms.index', compact('rooms'));
+}
 
     public function approve($id){
         $room = Room::findOrFail($id);
