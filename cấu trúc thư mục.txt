@@ -1,0 +1,48 @@
+app/
+├── Http/
+│   ├── Controllers/         # Controller 
+│       ├── AuthController.php
+│       ├── ListingController.php
+│       └── RoomController.php
+├── Models/                   # Domain layer
+│   ├── User.php
+│   ├── Room.php
+│   └── Listing.php
+├── Services/                 # Business logic
+│   ├── AuthService.php
+│   ├── RoomService.php
+│   └── ListingService.php
+├── Repositories/             # Data access
+│   ├── UserRepository.php
+│   ├── RoomRepository.php
+│   └── ListingRepository.php
+├── Interfaces/               # Interface cho Service/Repository
+│   ├── Service/
+│   │   ├── IAuthService.php
+│   │   ├── IRoomService.php
+│   │   └── IListingService.php
+│   └── Repository/
+│       ├── IUserRepository.php
+│       ├── IRoomRepository.php
+│       └── IListingRepository.php
+resources/
+└── views/                     # UI layer
+    ├── auth/
+    │   ├── forgot-password.blade.php
+    │   ├── login.blade.php
+    │   └── register.blade.php
+    ├── layouts/
+    │   ├── app.blade.php
+    │   ├── footer.blade.php
+    │   └── navbar.blade.php
+    ├── listings/
+    │   ├── index.blade.php
+    │   └── show.blade.php
+    ├── rooms/
+    │   ├── create.blade.php
+    │   ├── edit.blade.php
+    │   ├── index.blade.php
+    │   └── show.blade.php
+    ├── home.blade.php
+    └── welcome.blade.php
+

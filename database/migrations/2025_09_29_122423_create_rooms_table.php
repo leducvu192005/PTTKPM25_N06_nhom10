@@ -13,14 +13,13 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->decimal('price', 8, 2);
-            $table->string('address');
-            $table->enum(
-                'status',
-                ['pending', 'approved', 'rejected'])->default('pending');           
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Liên kết với người đăng
+            $table->string('title'); // Tiêu đề phòng trọ
+            $table->text('description'); // Mô tả chi tiết
+            $table->string('address'); // Địa chỉ
+            $table->unsignedBigInteger('price'); // Giá (có thể dùng float nếu có số thập phân)
+            $table->string('image_path'); // Đường dẫn ảnh đại diện
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending'); // Trạng thái phê duyệt
             $table->timestamps();
         });
     }

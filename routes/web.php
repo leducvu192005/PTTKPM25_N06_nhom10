@@ -1,46 +1,65 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use App\Http\Controllers\ListingController;
-use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AuthController;
-//admin
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('dashboard');
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+// Nếu có ListingController và AuthController thì import luôn:
+// use App\Http\Controllers\ListingController;
+// use App\Http\Controllers\AuthController;
 
-    Route::get('/rooms', [AdminController::class, 'allRooms'])->name('rooms.index');
-    Route::post('/rooms/{id}/approve', [AdminController::class, 'approve'])->name('rooms.approve');
-    Route::post('/rooms/{id}/reject', [AdminController::class, 'reject'])->name('rooms.reject');
-    Route::delete('/rooms/{id}', [AdminController::class, 'destroy'])->name('rooms.destroy');
+// ------------------------------------
+// 1. ROUTES AUTHENTICATION (Đăng nhập/Đăng ký/Đăng xuất)
+// ------------------------------------
+Route::middleware('guest')->group(function () {
+    // Đăng ký
+    Route::get('/register', [RegisterController::class, 'create'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
 
-    // Thêm tạm route cho users và categories
-    Route::get('/users', function () {
-        return view('admin.users.index');
-    })->name('users.index');
-
-    Route::get('/categories', function () {
-        return view('admin.categories.index');
-    })->name('categories.index');
+    // Đăng nhập
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
 });
 
-//rooms
-Route::resource('rooms', RoomsController::class);
+// Đăng xuất (luôn cần đăng nhập)
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->name('logout')
+    ->middleware('auth');
 
-// Trang chủ -> gọi home trong ListingController
-Route::get('/', [ListingController::class, 'home'])->name('home');
 
-// Listings CRUD
-Route::resource('listings', ListingController::class);
-// Auth pages
-Route::get('/login', fn () => view('auth.login'))->name('login');
-Route::get('/register', fn () => view('auth.register'))->name('register');
-Route::get('/forgot-password', fn () => view('auth.forgot-password'))->name('password.request');
+// ------------------------------------
+// 2. ROUTES DÀNH CHO NGƯỜI THUÊ (Public)
+// ------------------------------------
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/rooms/{id}', [HomeController::class, 'show'])->name('rooms.show'); // Chi tiết phòng
 
-Route::post('/login',[AuthController::class,'login'])->name('login.post');
+
+// ------------------------------------
+// 3. ROUTES DÀNH CHO USER ĐĂNG PHÒNG (Cần đăng nhập)
+// ------------------------------------
+Route::middleware(['auth'])->group(function () {
+    // Danh sách phòng trọ đã đăng của User
+    Route::get('/my-rooms', [RoomController::class, 'index'])->name('rooms.index'); 
+    
+    // CRUD phòng trọ (trừ index/show)
+    Route::resource('rooms', RoomController::class)->except(['index', 'show']); 
+});
+
+
+// ------------------------------------
+// 4. ROUTES DÀNH CHO ADMIN (Cần đăng nhập + Admin)
+// ------------------------------------
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/pending-rooms', [AdminController::class, 'pendingRooms'])->name('pending.rooms');
+    Route::post('/approve/{id}', [AdminController::class, 'approveRoom'])->name('approve');
+    Route::delete('/reject/{id}', [AdminController::class, 'rejectRoom'])->name('reject');
+    // Thêm các route quản lý user, v.v. tại đây
+});
+
+// Nếu bạn thực sự có ListingController và AuthController thì mở 2 cái dưới:
+// Route::resource('listings', ListingController::class);
+// Route::post('/login',[AuthController::class,'login'])->name('login.post');
