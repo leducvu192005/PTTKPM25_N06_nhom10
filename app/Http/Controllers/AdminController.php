@@ -7,13 +7,24 @@ use App\Models\Room;
 
 class AdminController extends Controller
 {
+<<<<<<< HEAD
     // Đảm bảo chỉ Admin mới truy cập được các hàm này
     public function __construct()
     {
         // Giả định bạn đã tạo Middleware tên là IsAdmin
         $this->middleware('auth');
         $this->middleware('is_admin'); 
+=======
+    public function allRooms(){
+ $rooms = Room::with('user','images')->get();
+    return view('admin.rooms.index', compact('rooms'));
+>>>>>>> f70668e (Cập nhật code local)
     }
+public function index()
+{
+    $rooms = Room::with('user','images')->get();
+    return view('admin.rooms.index', compact('rooms'));
+}
 
     /**
      * Hiển thị trang quản trị (Dashboard)

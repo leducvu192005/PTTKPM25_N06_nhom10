@@ -109,7 +109,8 @@
     </div>
     <div class="right">
         <h2>Xin chào bạn<br>Đăng nhập để tiếp tục</h2>
-        <form method="POST" action="/login">
+        <form method="POST" action="{{ url('/api/login') }}">
+
             @csrf
             <div class="input-group">
                 <i class="fa fa-user"></i>
