@@ -16,7 +16,7 @@ class AdminUserSeeder extends Seeder
         // Kiểm tra để tránh tạo trùng lặp
         if (!User::where('email', 'admin@example.com')->exists()) {
             User::create([
-                'name' => 'Admin Chính',
+                'name' => 'Admin',
                 'full_name' => 'Quản trị viên Hệ thống',
                 'email' => 'admin@example.com',
                 'phone_number' => '0901234567',

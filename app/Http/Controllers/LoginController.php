@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,22 +20,31 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        // 1. Validate dữ liệu
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+        // 1. Validate dữ liệu (chỉ kiểm tra required, không ép buộc phải là email)
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required',
         ]);
 
-        // 2. Xử lý đăng nhập
-        if (Auth::attempt($credentials, $request->remember)) {
+        $loginField = $request->input('login');
+        $credentials = ['password' => $request->password];
+
+        // 2. Xác định đăng nhập bằng email hay phone
+        if (filter_var($loginField, FILTER_VALIDATE_EMAIL)) {
+            $credentials['email'] = $loginField;
+        } else {
+            $credentials['phone_number'] = $loginField;
+        }
+
+        // 3. Xử lý đăng nhập
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
-            
-            // 3. Chuyển hướng theo quyền
+
+            // 4. Chuyển hướng theo quyền
             if (Auth::user()->is_admin) {
                 return redirect()->intended('/admin');
             }
-            
-            return redirect()->intended('/');
+            return redirect()->intended('home');
         }
 
         return back()->withErrors([

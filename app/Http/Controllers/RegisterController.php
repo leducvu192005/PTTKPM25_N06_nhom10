@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -25,17 +24,17 @@ class RegisterController extends Controller
     {
         // 1. Validate dữ liệu
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'fullname' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:20|unique:users,phone_number',
+            'password' => 'required|string|min:6',
         ]);
 
         // 2. Tạo User
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
+            'name' => $request->fullname,   // map fullname -> name
+            'phone_number' => $request->phone,     // nhớ thêm cột phone trong migration users
             'password' => Hash::make($request->password),
-            'is_admin' => false, // Mặc định tất cả người đăng ký đều là User thường
+            'is_admin' => false,
         ]);
 
         // 3. Tự động đăng nhập

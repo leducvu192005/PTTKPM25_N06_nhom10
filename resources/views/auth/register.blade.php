@@ -126,7 +126,7 @@
             </div>
             <div class="input-group">
                 <i class="fa fa-phone"></i>
-                <input type="text" name="phone" placeholder="Nhập số điện thoại" required>
+                <input type="text" name="phone_number" placeholder="Nhập số điện thoại" required>
             </div>
             <div class="input-group">
                 <i class="fa fa-lock"></i>

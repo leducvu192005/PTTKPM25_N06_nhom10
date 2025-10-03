@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 // Nếu có ListingController và AuthController thì import luôn:
 // use App\Http\Controllers\ListingController;
@@ -63,3 +64,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
 // Nếu bạn thực sự có ListingController và AuthController thì mở 2 cái dưới:
 // Route::resource('listings', ListingController::class);
 // Route::post('/login',[AuthController::class,'login'])->name('login.post');
+Route::get('/home', function () {
+    $listings = []; // tạm thời không có dữ liệu
+    return view('home', compact('listings'));
+});
+
+Route::resource('listings', ListingController::class);
