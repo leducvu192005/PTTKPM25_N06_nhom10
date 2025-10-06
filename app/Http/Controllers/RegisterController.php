@@ -32,7 +32,7 @@ class RegisterController extends Controller
         // 2. Tạo User
         $user = User::create([
             'name' => $request->fullname,   // map fullname -> name
-            'phone_number' => $request->phone,     // nhớ thêm cột phone trong migration users
+            'phone_number' => $request->phone_number,     // nhớ thêm cột phone trong migration users
             'password' => Hash::make($request->password),
             'is_admin' => false,
         ]);

@@ -19,36 +19,29 @@ class LoginController extends Controller
      * Xử lý logic đăng nhập.
      */
     public function store(Request $request)
-    {
-        // 1. Validate dữ liệu (chỉ kiểm tra required, không ép buộc phải là email)
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+{
+    $request->validate([
+        'phone_number' => 'required',
+        'password' => 'required',
+    ]);
 
-        $loginField = $request->input('login');
-        $credentials = ['password' => $request->password];
+    $credentials = [
+        'phone_number' => $request->phone_number,
+        'password' => $request->password,
+    ];
 
-        // 2. Xác định đăng nhập bằng email hay phone
-        if (filter_var($loginField, FILTER_VALIDATE_EMAIL)) {
-            $credentials['email'] = $loginField;
-        } else {
-            $credentials['phone_number'] = $loginField;
+    if (Auth::attempt($credentials, $request->filled('remember'))) {
+        $request->session()->regenerate();
+
+        if (Auth::user()->is_admin) {
+            return redirect()->intended('/admin');
         }
-
-        // 3. Xử lý đăng nhập
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
-            $request->session()->regenerate();
-
-            // 4. Chuyển hướng theo quyền
-            if (Auth::user()->is_admin) {
-                return redirect()->intended('/admin');
-            }
-            return redirect()->intended('home');
-        }
-
-        return back()->withErrors([
-            'email' => 'Thông tin đăng nhập không hợp lệ.',
-        ])->onlyInput('email');
+        return redirect()->intended('/');
     }
+
+    return back()->withErrors([
+        'phone_number' => 'Số điện thoại hoặc mật khẩu không đúng.',
+    ])->onlyInput('phone_number');
+}
+
 }

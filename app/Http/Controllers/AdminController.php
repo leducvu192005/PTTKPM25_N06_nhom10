@@ -8,14 +8,8 @@ use App\Models\User;
 
 class AdminController extends Controller
 {
-    // Đảm bảo chỉ Admin mới truy cập được các hàm này
-    public function __construct()
-    {
-        // Giả định bạn đã tạo Middleware tên là is_admin
-        $this->middleware('auth');
-        $this->middleware('is_admin'); 
-    }
 
+    
     /**
      * Hiển thị dashboard quản trị
      */

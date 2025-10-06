@@ -109,12 +109,12 @@
     </div>
     <div class="right">
         <h2>Xin chào bạn<br>Đăng nhập để tiếp tục</h2>
-        <form method="POST" action="{{ url('/login') }}">
+        <form method="POST" action="{{ route('login.store') }}">
 
             @csrf
             <div class="input-group">
                 <i class="fa fa-user"></i>
-                <input type="text" name="login" placeholder="SĐT chính hoặc email" required>
+                <input type="text" name="phone_number" placeholder="Số điện thoại" required>
             </div>
             <div class="input-group">
                 <i class="fa fa-lock"></i>

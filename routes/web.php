@@ -22,7 +22,7 @@ Route::middleware('guest')->group(function () {
 
     // Đăng nhập
     Route::get('/login', [LoginController::class, 'create'])->name('login');
-    Route::post('/login', [LoginController::class, 'store']);
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
 });
 
 // Đăng xuất (luôn cần đăng nhập)
@@ -58,7 +58,10 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     Route::get('/pending-rooms', [AdminController::class, 'pendingRooms'])->name('pending.rooms');
     Route::post('/approve/{id}', [AdminController::class, 'approveRoom'])->name('approve');
     Route::delete('/reject/{id}', [AdminController::class, 'rejectRoom'])->name('reject');
-    // Thêm các route quản lý user, v.v. tại đây
+    // Thêm các route quản lý user, v.v. tại đây\
+    Route::view('/users', 'admin.users.index')->name('users.index');
+    Route::view('/rooms', 'admin.rooms.index')->name('rooms.index');
+    Route::view('/categories', 'admin.categories.index')->name('categories.index');
 });
 
 // Nếu bạn thực sự có ListingController và AuthController thì mở 2 cái dưới:
@@ -70,3 +73,6 @@ Route::get('/home', function () {
 });
 
 Route::resource('listings', ListingController::class);
+Route::get('/users', fn() => view('admin'))->name('users.index');
+Route::get('/rooms', fn() => view('admin'))->name('rooms.index');
+Route::get('/categories', fn() => view('admin'))->name('categories.index');

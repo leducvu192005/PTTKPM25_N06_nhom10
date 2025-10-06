@@ -47,7 +47,7 @@
               <i class="fa-solid fa-user"></i> Tài khoản
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
+              <li><a class="dropdown-item" href="{{ url('/login') }}">Đăng nhập</a></li>
               <li><a class="dropdown-item" href="{{ route('register') }}">Đăng ký</a></li>
             </ul>
           </li>
