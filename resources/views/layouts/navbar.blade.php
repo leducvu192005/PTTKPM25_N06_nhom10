@@ -11,18 +11,48 @@
     
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto align-items-lg-center">
-        <li class="nav-item"><a class="nav-link fw-semibold" href="{{ url('/rooms') }}">Danh sách phòng</a></li>
-<li class="nav-item"><a class="nav-link fw-semibold" href="{{ url('/rooms/create') }}">Đăng tin</a></li>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle fw-semibold" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
-            <i class="fa-solid fa-user"></i> Tài khoản
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end">
-             <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
-            <li><a class="dropdown-item" href="{{ route('register') }}">Đăng ký</a></li>
-          </ul>
+        
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="{{ url('/rooms') }}">Danh sách phòng</a>
         </li>
+
+        @auth
+          <!-- Chỉ hiện khi đã đăng nhập -->
+          <li class="nav-item">
+            <a class="nav-link fw-semibold" href="{{ url('/rooms/create') }}">Đăng tin</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-user"></i> {{ Auth::user()->name }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item" href="#">Hồ sơ</a>
+              </li>
+              <li>
+                <form action="{{ route('logout') }}" method="POST">
+                  @csrf
+                  <button class="dropdown-item" type="submit">Đăng xuất</button>
+                </form>
+              </li>
+            </ul>
+          </li>
+        @endauth
+
+        @guest
+          <!-- Chỉ hiện khi chưa đăng nhập -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-semibold" href="#" id="userMenu" role="button" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-user"></i> Tài khoản
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="{{ route('login') }}">Đăng nhập</a></li>
+              <li><a class="dropdown-item" href="{{ route('register') }}">Đăng ký</a></li>
+            </ul>
+          </li>
+        @endguest
+
       </ul>
     </div>
   </div>

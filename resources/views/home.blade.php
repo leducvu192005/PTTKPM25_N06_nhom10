@@ -14,16 +14,16 @@
         <h1 class="mb-3">Tìm phòng trọ, nhà đất dễ dàng</h1>
         <p class="mb-4">Nhanh chóng - Tiện lợi - Chính xác</p>
 
-        <form class="row g-2 bg-white p-3 rounded shadow" style="max-width: 800px;">
+        <form class="row g-2 bg-white p-3 rounded shadow" style="max-width: 800px;" method="GET" action="{{ route('home') }}">
             <div class="col-md-6">
-                <input type="text" class="form-control" placeholder="Nhập địa điểm, quận/huyện...">
+                <input type="text" name="search" class="form-control" placeholder="Nhập địa điểm, quận/huyện..." value="{{ request('search') }}">
             </div>
             <div class="col-md-3">
-                <select class="form-select">
-                    <option selected>Loại phòng</option>
-                    <option>Chung cư</option>
-                    <option>Chung cư mini</option>
-                    <option>Phòng trọ</option>
+                <select class="form-select" name="type">
+                    <option value="">Loại phòng</option>
+                    <option value="chung-cu">Chung cư</option>
+                    <option value="chung-cu-mini">Chung cư mini</option>
+                    <option value="phong-tro">Phòng trọ</option>
                 </select>
             </div>
             <div class="col-md-3">
@@ -37,21 +37,21 @@
   <!-- Listing -->
   <div class="container">
     <div class="row">
-      @forelse($listings as $listing)
+      @forelse($rooms as $room)
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
-            <a href="{{ route('listings.show', $listing->id) }}">
-              <img src="{{ $listing->image ? asset('storage/'.$listing->image) : asset('images/default-room.jpg') }}" 
+            <a href="{{ route('rooms.show', $room->id) }}">
+              <img src="{{ $room->image ? asset('storage/'.$room->image) : asset('images/default-room.jpg') }}" 
                    class="card-img-top" alt="Ảnh phòng">
             </a>
             <div class="card-body">
               <h5 class="card-title">
-                <a href="{{ route('listings.show', $listing->id) }}" class="text-decoration-none text-dark">
-                  {{ $listing->title }}
+                <a href="{{ route('rooms.show', $room->id) }}" class="text-decoration-none text-dark">
+                  {{ $room->title }}
                 </a>
               </h5>
-              <p class="text-danger fw-bold">{{ $listing->price }}</p>
-              <p class="text-muted small">{{ $listing->area }} m² • {{ $listing->address }}</p>
+              <p class="text-danger fw-bold">{{ number_format($room->price, 0, ',', '.') }} đ/tháng</p>
+              <p class="text-muted small">{{ $room->area }} m² • {{ $room->address }}</p>
             </div>
           </div>
         </div>
@@ -60,13 +60,6 @@
       @endforelse
     </div>
   </div>
-  <div class="hero-section position-relative">
-    <img src="{{ asset('F:\TimPhongTro\PTTKPM25_N06_nhom10\public\assets\background.jpg') }}" 
-         class="w-100 h-100 position-absolute top-0 start-0 object-fit-cover">
-    <div class="overlay position-relative">
-    </div>
-</div>
-
 
 @endsection
 
@@ -75,9 +68,9 @@
 .hero-section {
     position: relative;
     height:600px;
-    width: 100vw  ;
+    width: 100%;
 
-    background: url("{{ asset('F:\TimPhongTro\PTTKPM25_N06_nhom10\public\assets\background.jpg') }}") no-repeat center center;
+    background: url("{{ asset('assets/background.jpg') }}") no-repeat center center;
     background-size: cover;
 }
 .hero-section .overlay {
@@ -87,4 +80,4 @@
     background: rgba(0,0,0,0.5);
 }
 </style>
-@endpush  
+@endpush

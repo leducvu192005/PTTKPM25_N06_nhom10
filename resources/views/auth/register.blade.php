@@ -118,7 +118,7 @@
     </div>
     <div class="right">
         <h2>Xin chào bạn<br>Đăng ký tài khoản mới</h2>
-        <form method="POST" action="/register">
+        <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="input-group">
                 <i class="fa fa-user"></i>

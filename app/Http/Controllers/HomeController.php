@@ -7,10 +7,7 @@ use App\Models\Room;
 
 class HomeController extends Controller
 {   
-    public function create()
-    {
-        return view('home');
-    }
+
     /**
      * Hiển thị danh sách phòng trọ đã được phê duyệt (Trang chủ).
      */
@@ -35,7 +32,7 @@ class HomeController extends Controller
 
         $rooms = $query->latest()->paginate(12);
 
-        return view('welcome', compact('rooms'));
+        return view('Home', compact('rooms'));
     }
 
     /**
