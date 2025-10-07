@@ -13,13 +13,13 @@
       <ul class="navbar-nav ms-auto align-items-lg-center">
         
         <li class="nav-item">
-          <a class="nav-link fw-semibold" href="{{ url('/rooms') }}">Danh sách phòng</a>
+          <a class="nav-link fw-semibold" href="{{ route('rooms.index') }}">Danh sách phòng</a>
         </li>
 
         @auth
           <!-- Chỉ hiện khi đã đăng nhập -->
           <li class="nav-item">
-            <a class="nav-link fw-semibold" href="{{ url('/rooms/create') }}">Đăng tin</a>
+            <a class="nav-link fw-semibold" href="{{ route('rooms.create') }}">Đăng tin</a>
           </li>
 
           <li class="nav-item dropdown">

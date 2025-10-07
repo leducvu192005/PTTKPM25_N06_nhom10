@@ -32,7 +32,7 @@ class HomeController extends Controller
 
         $rooms = $query->latest()->paginate(12);
 
-        return view('Home', compact('rooms'));
+        return view('home', compact('rooms'));
     }
 
     /**

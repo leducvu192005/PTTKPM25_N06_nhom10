@@ -35,7 +35,9 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 // 2. ROUTES DÀNH CHO NGƯỜI THUÊ (Public)
 // ------------------------------------
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/rooms/{id}', [HomeController::class, 'show'])->name('rooms.show'); // Chi tiết phòng
+Route::get('/rooms/{id}', [HomeController::class, 'show'])
+->whereNumber('id')
+->name('rooms.show'); // Chi tiết phòng
 
 
 // ------------------------------------
@@ -67,12 +69,10 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
 // Nếu bạn thực sự có ListingController và AuthController thì mở 2 cái dưới:
 // Route::resource('listings', ListingController::class);
 // Route::post('/login',[AuthController::class,'login'])->name('login.post');
-Route::get('/home', function () {
+/*Route::get('/home', function () {
     $listings = []; // tạm thời không có dữ liệu
     return view('home', compact('listings'));
 });
-
+*/
 Route::resource('listings', ListingController::class);
-Route::get('/users', fn() => view('admin'))->name('users.index');
-Route::get('/rooms', fn() => view('admin'))->name('rooms.index');
-Route::get('/categories', fn() => view('admin'))->name('categories.index');
+

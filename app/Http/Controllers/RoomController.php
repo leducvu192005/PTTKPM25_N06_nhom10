@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class RoomController extends Controller
 {
     // Đảm bảo chỉ user đã đăng nhập mới có thể truy cập
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Hiển thị danh sách phòng trọ của user hiện tại (Người đăng).
