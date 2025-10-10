@@ -28,7 +28,8 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
-                <a class="dropdown-item" href="#">Hồ sơ</a>
+                <a class="dropdown-item" href="{{ url('/profile') }}">Hồ sơ</a>
+
               </li>
               <li>
                 <form action="{{ route('logout') }}" method="POST">

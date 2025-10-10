@@ -75,4 +75,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
 });
 */
 Route::resource('listings', ListingController::class);
+// ------------------------------------
+// 3.1. ROUTES HỒ SƠ KHÁCH HÀNG (Cần đăng nhập)
+// ------------------------------------
 
+
+Route::view('/profile', 'profile.index')->middleware('auth')->name('profile');
