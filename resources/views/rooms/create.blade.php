@@ -21,7 +21,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Hình ảnh</label>
-        <input type="file" name="image" class="form-control" required>
+        <input type="file" name="images[]" class="form-control" multiple>
     </div>
     <button type="submit" class="btn btn-success">Đăng tin</button>
 </form>

@@ -16,7 +16,7 @@
                         {{-- Ảnh --}}
                         <div class="col-md-4">
                             @if($room->images && count($room->images) > 0)
-                                <img src="{{ asset('images/' . $room->images[0]) }}" 
+                                <img src="{{ asset('storage/' . $room->images[0]->image_path) }}" 
                                      class="img-fluid h-100 object-fit-cover" alt="{{ $room->title }}">
                             @else
                                 <img src="https://picsum.photos/400/250?random={{ $loop->index }}" 

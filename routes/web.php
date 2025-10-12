@@ -45,8 +45,9 @@ Route::get('/rooms/{id}', [HomeController::class, 'show'])
 // ------------------------------------
 Route::middleware(['auth'])->group(function () {
     // Danh sách phòng trọ đã đăng của User
-    Route::get('/my-rooms', [RoomController::class, 'index'])->name('rooms.index'); 
-    
+    Route::get('/my-rooms', [RoomController::class, 'index'])
+    ->name('rooms.index')
+    ->middleware('auth');    
     // CRUD phòng trọ (trừ index/show)
     Route::resource('rooms', RoomController::class)->except(['index', 'show']); 
 });
