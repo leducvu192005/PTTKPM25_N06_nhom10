@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
 // Nếu có ListingController và AuthController thì import luôn:
 // use App\Http\Controllers\ListingController;
 // use App\Http\Controllers\AuthController;
@@ -82,3 +83,26 @@ Route::resource('listings', ListingController::class);
 
 
 Route::view('/profile', 'profile.index')->middleware('auth')->name('profile');
+// GIAO DIỆN ADMIN
+// ========================
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Tổng quan
+    Route::get('/dashboard', function () {
+        return view('admin.users.index');
+    })->name('dashboard');
+
+    // Quản lý phòng trọ
+    Route::get('/rooms', function () {
+        return view('admin.Room_manage');
+    })->name('rooms');
+
+    // Người thuê
+    Route::get('/tenants', function () {
+        return view('admin.users.index');
+    })->name('tenants');
+
+    // Đặt phòng
+    Route::get('/bookings', function () {
+        return view('admin.booking.index');
+    })->name('bookings');
+});
