@@ -54,7 +54,12 @@
         <a href="{{ route('admin.tenants') }}" class="{{ request()->routeIs('admin.user.index') ? 'active' : '' }}">Người thuê</a>
         <a href="{{ route('admin.bookings') }}" class="{{ request()->routeIs('admin.bookings') ? 'active' : '' }}">Duyệt     phòng</a>
         <hr>
-        <a href="#" class="text-danger mt-3">Đăng xuất</a>
+         <li>
+                <form action="{{ route('logout') }}" method="POST">
+                  @csrf
+                  <button class="dropdown-item" type="submit">Đăng xuất</button>
+                </form>
+              </li>
     </div>
 
     <div class="content">
