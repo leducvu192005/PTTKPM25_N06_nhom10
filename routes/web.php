@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Nếu có ListingController và AuthController thì import luôn:
 // use App\Http\Controllers\ListingController;
-// use App\Http\Controllers\AuthController;
+
 
 // ------------------------------------
 // 1. ROUTES AUTHENTICATION (Đăng nhập/Đăng ký/Đăng xuất)
@@ -57,7 +57,10 @@ Route::middleware(['auth'])->group(function () {
 // ------------------------------------
 // 4. ROUTES DÀNH CHO ADMIN (Cần đăng nhập + Admin)
 // ------------------------------------
-Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'is_admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/pending-rooms', [AdminController::class, 'pendingRooms'])->name('pending.rooms');
     Route::post('/approve/{id}', [AdminController::class, 'approveRoom'])->name('approve');
@@ -66,6 +69,8 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(
     Route::view('/users', 'admin.users.index')->name('users.index');
     Route::view('/rooms', 'admin.rooms.index')->name('rooms.index');
     Route::view('/categories', 'admin.categories.index')->name('categories.index');
+
+
 });
 
 // Nếu bạn thực sự có ListingController và AuthController thì mở 2 cái dưới:
