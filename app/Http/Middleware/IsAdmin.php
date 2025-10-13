@@ -17,6 +17,6 @@ class IsAdmin
         }
         
         // Nếu không phải Admin, cấm truy cập
-        return abort(403, 'Bạn không có quyền truy cập trang quản trị này.');
+        return redirect('/home');
     }
 }

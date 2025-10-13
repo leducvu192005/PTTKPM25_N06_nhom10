@@ -12,7 +12,12 @@ class HomeController extends Controller
      * Hiển thị danh sách phòng trọ đã được phê duyệt (Trang chủ).
      */
     public function index(Request $request)
-    {
+    {   
+        // Nếu là admin thì tự động chuyển hướng sang trang admin
+        if (auth()->check() && auth()->user()->role === 'admin') {
+        return redirect('/admin');
+    }
+
         $query = Room::where('status', 'approved'); // Chỉ lấy phòng đã phê duyệt
 
         // Xử lý tìm kiếm
