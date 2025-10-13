@@ -27,7 +27,6 @@
                         <th>Tên phòng</th>
                         <th>Chủ nhà</th>
                         <th>Giá thuê</th>
-                        <th>Trạng thái</th>
                         <th>Người thuê</th>
                         <th>Ngày đăng</th>
                         <th class="text-center">Hành động</th>
@@ -40,37 +39,29 @@
             'name' => 'P101 - Quận 1',
             'owner' => 'Nguyễn Văn Nam',
             'price' => '₫5,000,000',
-            'status' => 'Đang cho thuê',
             'tenant' => 'Trần Văn A',
             'date' => '05/03/2024',
-            'status_class' => 'bg-success'
         ],
         [
             'name' => 'P205 - Quận 3',
             'owner' => 'Phạm Thị Bích',
             'price' => '₫4,800,000',
-            'status' => 'Trống',
             'tenant' => '-',
             'date' => '10/04/2024',
-            'status_class' => 'bg-secondary'
         ],
         [
             'name' => 'P308 - Quận 7',
             'owner' => 'Lê Minh Tuấn',
             'price' => '₫6,200,000',
-            'status' => 'Đang cho thuê',
             'tenant' => 'Ngô Thanh Tùng',
             'date' => '20/06/2024',
-            'status_class' => 'bg-success'
         ],
         [
             'name' => 'P412 - Quận 5',
             'owner' => 'Vũ Hoàng Long',
             'price' => '₫3,900,000',
-            'status' => 'Đang bảo trì',
             'tenant' => '-',
             'date' => '25/07/2024',
-            'status_class' => 'bg-warning text-dark'
         ],
     ];
 @endphp
@@ -81,7 +72,6 @@
             <td><strong>{{ $room['name'] }}</strong></td>
             <td>{{ $room['owner'] }}</td>
             <td>{{ $room['price'] }}</td>
-            <td><span class="badge {{ $room['status_class'] }}">{{ $room['status'] }}</span></td>
             <td>{{ $room['tenant'] }}</td>
             <td>{{ $room['date'] }}</td>
             <td class="text-center">
