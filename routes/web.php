@@ -96,10 +96,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         return view('admin.Room_manage');
     })->name('rooms');
 
-    // Người thuê
-    Route::get('/tenants', function () {
-        return view('admin.users.index');
-    })->name('tenants');
+
+// Người thuê
+Route::get('/tenants', function () {
+    return view('admin.users.index');
+})->name('tenants');
+
 
     // Đặt phòng
     Route::get('/bookings', function () {

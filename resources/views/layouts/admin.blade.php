@@ -52,7 +52,7 @@
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Tổng quan</a>
         <a href="{{ route('admin.rooms') }}" class="{{ request()->routeIs('admin.Room_manage') ? 'active' : '' }}">Quản lý phòng trọ</a>
         <a href="{{ route('admin.tenants') }}" class="{{ request()->routeIs('admin.user.index') ? 'active' : '' }}">Người thuê</a>
-        <a href="{{ route('admin.bookings') }}" class="{{ request()->routeIs('admin.bookings') ? 'active' : '' }}">Đặt phòng</a>
+        <a href="{{ route('admin.bookings') }}" class="{{ request()->routeIs('admin.bookings') ? 'active' : '' }}">Duyệt     phòng</a>
         <hr>
         <a href="#" class="text-danger mt-3">Đăng xuất</a>
     </div>
