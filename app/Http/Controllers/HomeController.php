@@ -40,10 +40,9 @@ class HomeController extends Controller
      */
     public function show($id)
     {
-        $room = Room::where('id', $id)
-                    ->where('status', 'approved')
-                    ->firstOrFail(); // Chỉ hiển thị phòng đã phê duyệt
-        
+        $room = Room::findOrFail($id);
+
         return view('rooms.show', compact('room'));
     }
+
 }

@@ -17,11 +17,37 @@ class RoomController extends Controller
     /**
      * Hiển thị danh sách phòng trọ của user hiện tại (Người đăng).
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rooms = Auth::user()->rooms()->latest()->paginate(10);
+        // Lấy danh sách phòng của user hiện tại
+        $query = Auth::user()->rooms()->with('images')->latest();
+
+        // 🔍 Lọc theo địa điểm (address)
+        if ($request->filled('address')) {
+            $query->where('address', 'like', '%' . $request->address . '%');
+        }
+
+        // 💰 Lọc theo mức giá
+        if ($request->filled('price_filter')) {
+            switch ($request->price_filter) {
+                case '1':
+                    $query->where('price', '<', 2000000);
+                    break;
+                case '2':
+                    $query->whereBetween('price', [2000000, 4000000]);
+                    break;
+                case '3':
+                    $query->where('price', '>', 4000000);
+                    break;
+            }
+        }
+
+        // 📄 Phân trang kết quả
+        $rooms = $query->paginate(10);
+
         return view('rooms.index', compact('rooms'));
     }
+
 
     /**
      * Hiển thị form tạo phòng trọ mới.
