@@ -33,7 +33,7 @@
         }
         .right {
             flex: 1;
-            padding: 40px;
+            padding: 50px;
         }
         h2 {
             margin-bottom: 20px;
@@ -42,9 +42,10 @@
         .input-group {
             position: relative;
             margin-bottom: 15px;
+
         }
         .input-group input {
-            width: 100%;
+            width: 80%;
             padding: 10px 40px 10px 40px;
             border: 1px solid #ccc;
             border-radius: 6px;
@@ -126,12 +127,7 @@
                 <a href="#">Quên mật khẩu?</a>
             </div>
         </form>
-        <div class="social">
-            <p>Hoặc</p>
-            <button><i class="fa-brands fa-apple"></i> Đăng nhập với Apple</button>
-
-            <button><i class="fa-brands fa-google"></i> Đăng nhập với Google</button>
-        </div>
+        
         <div class="register">
             Chưa là thành viên? <a href="/register">Đăng ký tại đây</a>
         </div>
