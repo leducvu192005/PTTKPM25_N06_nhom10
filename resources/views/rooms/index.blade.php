@@ -69,6 +69,17 @@
                         <input type="text" name="address" class="form-control" 
                                placeholder="Nhập địa điểm..." value="{{ request('address') }}">
                     </div>
+                    {{-- Lọc theo loại phòng --}}
+                    <div class="mb-3">
+                            <label class="form-label">Loại phòng</label>
+        <select name="room_type" class="form-select" required>
+            <option value="">-- Chọn loại phòng --</option>
+            <option value="Phòng trọ">Phòng trọ</option>
+            <option value="Chung cư mini">Chung cư mini</option>
+            <option value="Nhà nguyên căn">Nhà nguyên căn</option>
+            </select>
+                    </div>
+
 
                     {{-- Lọc theo giá --}}
                     <div class="mb-3">

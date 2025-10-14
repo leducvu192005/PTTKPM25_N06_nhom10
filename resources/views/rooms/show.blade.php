@@ -55,26 +55,6 @@
       </a>
     </div>
 
-    <div class="bg-white shadow rounded-lg p-6">
-      <h3 class="text-lg font-semibold mb-4">Tin liên quan</h3>
-      <ul class="space-y-3">
-        <li>
-          <a href="#" class="block text-blue-600 hover:underline">
-            Phòng trọ giá rẻ tại Cầu Giấy
-          </a>
-        </li>
-        <li>
-          <a href="#" class="block text-blue-600 hover:underline">
-            Chung cư mini full nội thất
-          </a>
-        </li>
-        <li>
-          <a href="#" class="block text-blue-600 hover:underline">
-            Phòng trọ gần ĐH Quốc Gia
-          </a>
-        </li>
-      </ul>
-    </div>
 
   </aside>
 </div>
