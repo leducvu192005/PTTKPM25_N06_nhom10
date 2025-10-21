@@ -7,7 +7,7 @@
   <!-- Hero section -->
 <div class="hero-section position-relative mb-5">
     <img src="{{ asset('assets/background.jpg') }}" 
-         alt="Background" 
+       x alt="Background" 
          class="w-100 h-100 position-absolute top-0 start-0 object-fit-cover">
 
     <div class="overlay d-flex flex-column justify-content-center align-items-center text-center text-white position-relative" style="z-index:1;">
@@ -15,10 +15,10 @@
         <p class="mb-4">Nhanh chóng - Tiện lợi - Chính xác</p>
 
         <form class="row g-2 bg-white p-3 rounded shadow" style="max-width: 800px;" method="GET" action="{{ route('home') }}">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <input type="text" name="search" class="form-control" placeholder="Nhập địa điểm, quận/huyện..." value="{{ request('search') }}">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <select class="form-select" name="type">
                     <option value="">Loại phòng</option>
                     <option value="chung-cu">Chung cư</option>
@@ -67,11 +67,18 @@
 <style>
 .hero-section {
     position: relative;
-    height:600px;
-    width: 100%;
-
-    background: url("{{ asset('assets/background.jpg') }}") no-repeat center center;
-    background-size: cover;
+   height:600px; 
+    width: 100%:
+}
+/*ảnh nền */
+.hero-section img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;      /* phủ full chiều rộng cửa sổ */
+    height: 100%;      /* phủ full chiều cao hero-section */
+    object-fit: cover; /* cắt ảnh cho vừa khung */
+    z-index: 0;
 }
 .hero-section .overlay {
     position: absolute;
