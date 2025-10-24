@@ -5,6 +5,14 @@
 @section('content')
     <h1 class="mb-4">🏠 Quản lý Phòng trọ</h1>
 
+    @if (session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @elseif (session('warning'))
+        <div class="alert alert-warning">{{ session('warning') }}</div>
+    @elseif (session('danger'))
+        <div class="alert alert-danger">{{ session('danger') }}</div>
+    @endif
+
     <table class="table table-striped">
         <thead class="table-dark">
             <tr>
@@ -31,6 +39,8 @@
                         @endif
                     </td>
                     <td>
+                        <a href="{{ route('admin.rooms.show', $room->id) }}" class="btn btn-sm btn-info">Xem</a>
+
                         @if($room->status != 'approved')
                             <form action="{{ route('admin.rooms.approve', $room->id) }}" method="POST" class="d-inline">
                                 @csrf
@@ -38,6 +48,7 @@
                                 <button class="btn btn-sm btn-success">Duyệt</button>
                             </form>
                         @endif
+
                         @if($room->status != 'rejected')
                             <form action="{{ route('admin.rooms.reject', $room->id) }}" method="POST" class="d-inline">
                                 @csrf
@@ -45,10 +56,12 @@
                                 <button class="btn btn-sm btn-warning">Từ chối</button>
                             </form>
                         @endif
+
                         <form action="{{ route('admin.rooms.destroy', $room->id) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-sm btn-danger">Xóa</button>
+                            <button class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Bạn có chắc muốn xóa phòng này không?')">Xóa</button>
                         </form>
                     </td>
                 </tr>

@@ -16,7 +16,7 @@ class Room extends Model
         'address',
         'price',
         'image_path',
-        'status', // pending, approved, rejected
+        'status', // pending, approved,rejected 
     ];
 
     public function user()

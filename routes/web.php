@@ -8,7 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
+use App\Http\Controllers\AdminRoomController;
 // Nếu có ListingController và AuthController thì import luôn:
 // use App\Http\Controllers\ListingController;
 
@@ -61,18 +61,26 @@ Route::middleware(['auth', 'is_admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
-    Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
-    Route::get('/pending-rooms', [AdminController::class, 'pendingRooms'])->name('pending.rooms');
-    Route::post('/approve/{id}', [AdminController::class, 'approveRoom'])->name('approve');
-    Route::delete('/reject/{id}', [AdminController::class, 'rejectRoom'])->name('reject');
-    // Thêm các route quản lý user, v.v. tại đây\
-    Route::view('/users', 'admin.users.index')->name('users.index');
-    Route::view('/rooms', 'admin.rooms.index')->name('rooms.index');
-    Route::view('/categories', 'admin.categories.index')->name('categories.index');
+        Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
 
+        // Quản lý phòng
+        Route::get('/rooms', [AdminController::class, 'allRooms'])->name('rooms.index');
+        
+        // Quản lý người dùng
+        Route::delete('/rooms/{id}', [AdminController::class, 'destroy'])->name('rooms.destroy');
 
+        // Quản lý danh mục
+        Route::view('/categories', 'admin.categories.index')->name('categories.index');
+    });
+Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
+    Route::get('/rooms', [AdminRoomController::class, 'index'])->name('admin.rooms.index');
+    Route::put('/rooms/{id}/approve', [AdminRoomController::class, 'approve'])->name('admin.rooms.approve');
+    Route::put('/rooms/{id}/reject', [AdminRoomController::class, 'reject'])->name('admin.rooms.reject');
+    Route::delete('/rooms/{id}', [AdminRoomController::class, 'destroy'])->name('admin.rooms.destroy');
+    Route::get('/rooms/{id}', [AdminRoomController::class, 'show'])->name('admin.rooms.show');
+    Route::get('/users', [AdminRoomController::class, 'users'])->name('admin.users.index');
+    Route::delete('/users/{id}', [AdminRoomController::class, 'deleteUser'])->name('admin.users.destroy');
 });
-
 // Nếu bạn thực sự có ListingController và AuthController thì mở 2 cái dưới:
 // Route::resource('listings', ListingController::class);
 // Route::post('/login',[AuthController::class,'login'])->name('login.post');
@@ -90,26 +98,3 @@ Route::resource('listings', ListingController::class);
 Route::view('/profile', 'profile.index')->middleware('auth')->name('profile');
 // GIAO DIỆN ADMIN
 // ========================
-Route::prefix('admin')->name('admin.')->group(function () {
-    // Tổng quan
-    Route::get('/dashboard', function () {
-        return view('admin.users.index');
-    })->name('dashboard');
-
-    // Quản lý phòng trọ
-    Route::get('/rooms', function () {
-        return view('admin.Room_manage');
-    })->name('rooms');
-
-
-// Người thuê
-Route::get('/tenants', function () {
-    return view('admin.users.index');
-})->name('tenants');
-
-
-    // Đặt phòng
-    Route::get('/bookings', function () {
-        return view('admin.booking.index');
-    })->name('bookings');
-});

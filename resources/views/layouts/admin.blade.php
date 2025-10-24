@@ -50,9 +50,8 @@
     <div class="sidebar">
         <h4 class="mb-4">🏢 RoomFinder</h4>
         <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Tổng quan</a>
-        <a href="{{ route('admin.rooms') }}" class="{{ request()->routeIs('admin.Room_manage') ? 'active' : '' }}">Quản lý phòng trọ</a>
-        <a href="{{ route('admin.tenants') }}" class="{{ request()->routeIs('admin.user.index') ? 'active' : '' }}">Người thuê</a>
-        <a href="{{ route('admin.bookings') }}" class="{{ request()->routeIs('admin.bookings') ? 'active' : '' }}">Duyệt     phòng</a>
+        <a href="{{ route('admin.rooms.index') }}" class="{{ request()->routeIs('admin.rooms.*') ? 'active' : '' }}">Quản lý phòng trọ</a>
+        <a href="{{ route('admin.users.index') }}" class="{{ request()->routeIs('admin.users.*') ? 'active' : '' }}">Người dùng</a>
         <hr>
         <form action="{{ route('logout') }}" method="POST">
             @csrf
