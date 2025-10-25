@@ -81,7 +81,7 @@ Route::prefix('admin')->middleware(['auth', 'is_admin'])->group(function () {
     Route::get('/users', [AdminRoomController::class, 'users'])->name('admin.users.index');
     Route::delete('/users/{id}', [AdminRoomController::class, 'deleteUser'])->name('admin.users.destroy');
 });
-// Nếu bạn thực sự có ListingController và AuthController thì mở 2 cái dưới:
+// Nếu bạn thực sự có ListingController và AuthController thì mở 2 cái dưới:j
 // Route::resource('listings', ListingController::class);
 // Route::post('/login',[AuthController::class,'login'])->name('login.post');
 /*Route::get('/home', function () {
