@@ -1,24 +1,12 @@
 @extends('layouts.admin')
 
 @section('content')
-
-@php
-    // ✅ Dữ liệu tạm (tránh lỗi khi backend chưa truyền)
-    $totalRooms    = $totalRooms    ?? 0;
-    $totalUsers    = $totalUsers    ?? 0;
-    $totalBookings = $totalBookings ?? 0;
-    $totalRevenue  = $totalRevenue  ?? 0;
-    $bookings      = $bookings      ?? collect([]);
-@endphp
-
 <div class="container mt-4">
     <div class="row">
-        {{-- Tổng số người dùng --}}
         <div class="col-md-4">
             <div class="card shadow-sm rounded-4 text-center p-3">
                 <h5 class="card-title">Tổng số người dùng</h5>
 
-    {{-- Hàng đầu tiên: Thống kê --}}
     <div class="row g-4">
         <div class="col-md-3">
             <div class="card shadow-sm rounded-4 text-center p-3">
@@ -34,7 +22,6 @@
             </div>
         </div>
 
-        {{-- Tổng số phòng --}}
         <div class="col-md-4">
             <div class="card shadow-sm rounded-4 text-center p-3">
                 <h5 class="card-title">Tổng số phòng</h5>
@@ -44,7 +31,6 @@
             </div>
         </div>
 
-        {{-- Số phòng đã duyệt --}}
         <div class="col-md-4">
             <div class="card shadow-sm rounded-4 text-center p-3">
                 <h5 class="card-title">Số phòng đã duyệt</h5>
@@ -58,7 +44,6 @@
         </div>
     </div>
 
-    {{-- Hàng thứ hai: Đặt phòng gần đây --}}
     <div class="row mt-5">
         <div class="col-12">
             <div class="card shadow-sm rounded-4">

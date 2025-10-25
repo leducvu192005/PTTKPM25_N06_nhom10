@@ -5,7 +5,6 @@
 @section('content')
 
 @php
-    // ✅ Cách A: nếu backend chưa truyền $rooms thì tạo collection rỗng để tránh lỗi
     $rooms = $rooms ?? collect();
 @endphp
 
@@ -13,7 +12,6 @@
     <h2 class="fw-bold mb-3">Quản lý phòng trọ</h2>
     <p class="text-muted mb-4">Quản lý danh sách phòng đang cho thuê và trạng thái hoạt động.</p>
 
-    {{-- Thanh công cụ --}}
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div class="input-group w-50">
             <input type="text" class="form-control" placeholder="Tìm kiếm theo tên phòng, khu vực...">
@@ -24,7 +22,6 @@
         </a>
     </div>
 
-    {{-- Bảng danh sách phòng --}}
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table align-middle">
