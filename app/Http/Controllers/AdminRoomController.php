@@ -15,14 +15,21 @@ class AdminRoomController extends Controller
         return view('admin.rooms.index', compact('rooms'));
     }
 
-    public function approve($id)
-    {
-        $room = Room::findOrFail($id);
-        $room->status = 'approved';
-        $room->save();
+   public function approve($id)
+{
+    // Lấy phòng kèm thông tin người đăng
+    $room = Room::with('user')->findOrFail($id);
 
-        return back()->with('success', 'Phòng đã được duyệt!');
-    }
+    // Cập nhật trạng thái và lưu thông tin chủ phòng
+    $room->update([
+        'status' => 'approved',
+        'owner_name' => $room->user ? $room->user->name : 'Đang cập nhật',
+        'owner_phone' => $room->user ? $room->user->phone_number : 'Đang cập nhật',
+    ]);
+
+    return back()->with('success', 'Phòng đã được duyệt và cập nhật thông tin chủ phòng!');
+}
+
 
     public function reject($id)
     {

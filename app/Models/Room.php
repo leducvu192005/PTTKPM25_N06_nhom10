@@ -16,6 +16,8 @@ class Room extends Model
         'address',
         'price',
         'image_path',
+         'owner_name',
+        'owner_phone',
         'status', // pending, approved,rejected 
     ];
 

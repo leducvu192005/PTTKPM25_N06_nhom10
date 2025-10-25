@@ -41,8 +41,9 @@
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
             <a href="{{ route('rooms.show', $room->id) }}">
-              <img src="{{ $room->image ? asset('storage/'.$room->image) : asset('images/default-room.jpg') }}" 
-                   class="card-img-top" alt="Ảnh phòng">
+         <img src="{{ asset('storage/' . $room->image_path) }}" 
+     class="card-img-top" alt="Ảnh phòng"
+      onerror="this.src='{{ asset('assets/background.jpg') }}'"
             </a>
             <div class="card-body">
               <h5 class="card-title">

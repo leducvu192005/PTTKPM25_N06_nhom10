@@ -21,7 +21,6 @@
             + Thêm phòng mới
         </a>
     </div>
-
     <div class="card shadow-sm">
         <div class="card-body">
             <table class="table align-middle">
