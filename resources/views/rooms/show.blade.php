@@ -12,13 +12,12 @@
 
 <!-- ẢNH PHÒNG CHÍNH -->
 
-  <!-- Bọc thẻ để ảnh bo góc đúng -->
   
 
-<div class="w-[60%] rounded-full overflow-hidden bg-gray-100">
+<div class="w-[420px] h-[420px] rounded-full overflow-hidden bg-gray-100">
     <img id="mainRoomImage"
          src="{{ $room->image_path ? asset('storage/' . $room->image_path) : asset('images/default-room.jpg') }}"
-         class="w-full h-[420px] object-contain rounded-xl"
+         class="w-full h-full object-cover"
          alt="Ảnh phòng chính">
 </div>
 
@@ -103,6 +102,26 @@ function changeMainImage(el) {
 @endif
 
   </div>
+  <!-- lưu tin-->
+@php
+    use App\Models\SavedPost;
+    $isSaved = SavedPost::where('user_id', Auth::id())
+                ->where('room_id', $room->id)
+                ->exists();
+@endphp
+
+@if ($isSaved)
+    <form action="{{ route('saved.destroy', $room->id) }}" method="POST" class="d-inline">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">❌ Bỏ lưu</button>
+    </form>
+@else
+    <form action="{{ route('saved.store', $room->id) }}" method="POST" class="d-inline">
+        @csrf
+        <button type="submit" class="btn btn-outline-primary">💾 Lưu tin</button>
+    </form>
+@endif
 
 </div>
 @endsection

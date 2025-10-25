@@ -10,7 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AdminRoomController;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\SavedPostController;
 // Nếu có ListingController và AuthController thì import luôn:
 // use App\Http\Controllers\ListingController;
 
@@ -61,6 +61,11 @@ Route::middleware(['auth'])->group(function () {
     // 🔐 Đổi mật khẩu
     Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])
         ->name('profile.changePassword');
+    // lưu tin và tin đã lưu 
+       Route::get('/saved', [SavedPostController::class, 'index'])->name('saved.index');        // Xem tin đã lưu
+    Route::post('/saved/{roomId}', [SavedPostController::class, 'store'])->name('saved.store'); // Lưu tin
+    Route::delete('/saved/{roomId}', [SavedPostController::class, 'destroy'])->name('saved.destroy'); // Bỏ lưu
+   
 });
 
 
