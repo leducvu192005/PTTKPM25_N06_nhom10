@@ -100,8 +100,6 @@ function changeMainImage(el) {
   Gọi ngay
 </a>
 @endif
-
-  </div>
   <!-- lưu tin-->
 @php
     use App\Models\SavedPost;
@@ -122,6 +120,8 @@ function changeMainImage(el) {
         <button type="submit" class="btn btn-outline-primary">💾 Lưu tin</button>
     </form>
 @endif
+  </div>
+
 
 </div>
 @endsection

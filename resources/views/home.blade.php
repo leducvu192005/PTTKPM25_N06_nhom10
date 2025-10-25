@@ -18,14 +18,15 @@
             <div class="col-md-5">
                 <input type="text" name="search" class="form-control" placeholder="Nhập địa điểm, quận/huyện..." value="{{ request('search') }}">
             </div>
-            <div class="col-md-4">
-                <select class="form-select" name="type">
-                    <option value="">Loại phòng</option>
-                    <option value="chung-cu">Chung cư</option>
-                    <option value="chung-cu-mini">Chung cư mini</option>
-                    <option value="phong-tro">Phòng trọ</option>
-                </select>
-            </div>
+           <div class="col-md-4">
+    <select class="form-select" name="type">
+        <option value="">Loại phòng</option>
+        <option value="chung-cu" {{ request('type') == 'nha-nguyen-can' ? 'selected' : '' }}>Nhà nguyên căn</option>
+        <option value="chung-cu-mini" {{ request('type') == 'chung-cu-mini' ? 'selected' : '' }}>Chung cư mini</option>
+        <option value="phong-tro" {{ request('type') == 'phong-tro' ? 'selected' : '' }}>Phòng trọ</option>
+    </select>
+</div>
+
             <div class="col-md-3">
                 <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
             </div>

@@ -15,15 +15,17 @@
         <label class="form-label">Địa chỉ</label>
         <input type="text" name="address" class="form-control" placeholder="VD: Cầu Giấy, Hà Nội" required>
     </div>
-    <div class ="mb-3">
-        <label class="form-label">Loại phòng</label>
-        <select name="room_type" class="form-select" required>
-            <option value="">-- Chọn loại phòng --</option>
-            <option value="Phòng trọ">Phòng trọ</option>
-            <option value="Chung cư mini">Chung cư mini</option>
-            <option value="Nhà nguyên căn">Nhà nguyên căn</option>
-            </select>
-    </div>
+   
+    <div class="mb-3">
+    <label class="form-label">Loại phòng</label>
+    <select name="type" class="form-select" required>
+        <option value="">-- Chọn loại phòng --</option>
+        <option value="phong-tro" {{ old('type') == 'phong-tro' ? 'selected' : '' }}>Phòng trọ</option>
+        <option value="chung-cu-mini" {{ old('type') == 'chung-cu-mini' ? 'selected' : '' }}>Chung cư mini</option>
+        <option value="nha-nguyen-can" {{ old('type') == 'nha-nguyen-can' ? 'selected' : '' }}>Nhà nguyên căn</option>
+    </select>
+</div>
+
 
     <div class="mb-3">
         <label class="form-label">Mô tả</label>

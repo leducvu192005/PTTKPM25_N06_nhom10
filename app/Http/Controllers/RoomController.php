@@ -68,6 +68,7 @@ class RoomController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric|min:1000',
             'address' => 'required|string|max:255',
+            'type'=> 'required|string|max:255',
             'images' => 'required',
             'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
@@ -77,6 +78,7 @@ class RoomController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'address' => $request->address,
+               'type' => $request->type,
             'image_path' => '',
             'status' => 'pending', // Mặc định là 'Chờ duyệt'
         ]);

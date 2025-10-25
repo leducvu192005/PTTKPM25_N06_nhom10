@@ -19,6 +19,7 @@ class Room extends Model
          'owner_name',
         'owner_phone',
         'status', // pending, approved,rejected 
+        'type',
     ];
 
     public function user()

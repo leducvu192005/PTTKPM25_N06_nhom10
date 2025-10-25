@@ -29,7 +29,10 @@ class HomeController extends Controller
                   ->orWhere('description', 'like', "%{$search}%");
             });
         }
-        
+        // lọc theo loại phòng
+         if ($request->filled('type')) {
+        $query->where('type', $request->type);
+    }
         // Xử lý lọc (Ví dụ: theo giá)
         if ($request->has('max_price') && $request->max_price != '') {
             $query->where('price', '<=', $request->max_price);
