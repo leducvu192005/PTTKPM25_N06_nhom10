@@ -4,12 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
     public function index()
     {
         return view('profile.index');
+    }
+
+
+     public function show()
+    {
+        $user = Auth::user();
+        return view('profile.index', compact('user')); // truyền biến $user sang view
     }
 
     public function update(Request $request)
@@ -38,4 +46,24 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Cập nhật thông tin thành công!');
     }
+    public function changePassword(Request $request)
+{
+    $request->validate([
+        'oldPassword' => 'required',
+        'newPassword' => 'required|min:6|confirmed', // Laravel cần có field newPassword_confirmation
+    ]);
+
+    $user = Auth::user();
+
+    // Kiểm tra mật khẩu cũ
+    if (!Hash::check($request->oldPassword, $user->password)) {
+        return back()->with('error', 'Mật khẩu hiện tại không chính xác.');
+    }
+
+    // Cập nhật mật khẩu mới
+    $user->password = Hash::make($request->newPassword);
+    $user->save();
+
+    return back()->with('success', 'Đổi mật khẩu thành công!');
+}
 }

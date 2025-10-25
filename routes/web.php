@@ -9,6 +9,8 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AdminRoomController;
+use App\Http\Controllers\ProfileController;
+
 // Nếu có ListingController và AuthController thì import luôn:
 // use App\Http\Controllers\ListingController;
 
@@ -47,10 +49,18 @@ Route::get('/rooms/{id}', [HomeController::class, 'show'])
 Route::middleware(['auth'])->group(function () {
     // Danh sách phòng trọ đã đăng của User
     Route::get('/my-rooms', [RoomController::class, 'index'])
-    ->name('rooms.index')
-    ->middleware('auth');    
+        ->name('rooms.index');    
+    
     // CRUD phòng trọ (trừ index/show)
     Route::resource('rooms', RoomController::class)->except(['index', 'show']); 
+
+    // Xem và sửa profile
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    // 🔐 Đổi mật khẩu
+    Route::post('/profile/change-password', [ProfileController::class, 'changePassword'])
+        ->name('profile.changePassword');
 });
 
 
@@ -95,6 +105,6 @@ Route::resource('listings', ListingController::class);
 // ------------------------------------
 
 
-Route::view('/profile', 'profile.index')->middleware('auth')->name('profile');
+//Route::view('/profile', 'profile.index')->middleware('auth')->name('profile');
 // GIAO DIỆN ADMIN
 // ========================

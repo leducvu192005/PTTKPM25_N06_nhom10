@@ -22,25 +22,27 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        // 1. Validate dữ liệu
+        // 1️⃣ Validate dữ liệu đầu vào
         $request->validate([
             'fullname' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email', // ✅ kiểm tra email hợp lệ + duy nhất
             'phone_number' => 'required|string|max:20|unique:users,phone_number',
             'password' => 'required|string|min:6',
         ]);
 
-        // 2. Tạo User
+        // 2️⃣ Tạo người dùng mới
         $user = User::create([
-            'name' => $request->fullname,   // map fullname -> name
-            'phone_number' => $request->phone_number,     // nhớ thêm cột phone trong migration users
+            'name' => $request->fullname,  // map fullname -> name
+            'email' => $request->email,    // ✅ thêm email
+            'phone_number' => $request->phone_number,
             'password' => Hash::make($request->password),
             'is_admin' => false,
         ]);
 
-        // 3. Tự động đăng nhập
+        // 3️⃣ Tự động đăng nhập sau khi đăng ký
         Auth::login($user);
 
-        // 4. Chuyển hướng về trang chủ
-        return redirect('/'); 
+        // 4️⃣ Chuyển hướng về trang chủ
+        return redirect('/')->with('success', 'Đăng ký thành công!');
     }
 }

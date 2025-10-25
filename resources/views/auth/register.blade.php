@@ -41,7 +41,7 @@
         }
         .input-group {
             position: relative;
-            margin-bottom: 20px; /* tạo khoảng cách giữa các input */
+            margin-bottom: 20px;
         }
         .input-group input {
             width: 100%;
@@ -70,27 +70,6 @@
         }
         .btn:hover {
             background: #d32f2f;
-        }
-        .social {
-            margin: 20px 0;
-            text-align: center;
-        }
-        .social button {
-            width: 100%;
-            margin: 5px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            background: white;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .social button:hover {
-            background: #f5f5f5;
         }
         .terms {
             font-size: 12px;
@@ -125,6 +104,10 @@
                 <input type="text" name="fullname" placeholder="Nhập họ và tên" required>
             </div>
             <div class="input-group">
+                <i class="fa fa-envelope"></i>
+                <input type="email" name="email" placeholder="Nhập email" required>
+            </div>
+            <div class="input-group">
                 <i class="fa fa-phone"></i>
                 <input type="text" name="phone_number" placeholder="Nhập số điện thoại" required>
             </div>
@@ -135,8 +118,6 @@
 
             <button type="submit" class="btn">Tiếp tục</button>
         </form>
-
-     
 
         <div class="terms">
             Bằng việc tiếp tục, bạn đồng ý với 
