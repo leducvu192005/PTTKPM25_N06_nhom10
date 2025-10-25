@@ -12,14 +12,17 @@
 
 <!-- ẢNH PHÒNG CHÍNH -->
 
-  
 
-<div class="w-[420px] h-[420px] rounded-full overflow-hidden bg-gray-100">
+<div class="w-[36px] h-[360px] rounded-full overflow-hidden bg-gray-100">
     <img id="mainRoomImage"
          src="{{ $room->image_path ? asset('storage/' . $room->image_path) : asset('images/default-room.jpg') }}"
-         class="w-full h-full object-cover"
+         class="w-full h-full object-cover" 
+         style="border-radius: 0; width: 650px; height: 500px; border-radius: 10px;"
          alt="Ảnh phòng chính">
 </div>
+
+
+
 
 
 <!-- ẢNH NHỎ BÊN DƯỚI -->
