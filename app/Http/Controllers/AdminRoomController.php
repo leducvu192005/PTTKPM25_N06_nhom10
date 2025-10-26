@@ -9,12 +9,30 @@ use Illuminate\Http\Request;
 
 class AdminRoomController extends Controller
 {
-    public function index()
+
+    public function users(Request $request)
     {
-        $rooms = Room::with('user')->orderBy('id', 'desc')->get();
+        $keyword = $request->input('keyword');
+        $users = User::when($keyword, function ($query, $keyword) {
+            $query->where('name', 'like', "%{$keyword}%");
+        })
+        ->orderBy('id', 'desc')
+        ->get();
+
+        return view('admin.users.index', compact('users'));
+    }
+    public function index(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $rooms = Room::with('user')
+            ->when($keyword, function ($query, $keyword) {
+                $query->where('title', 'like', "%{$keyword}%");
+            })
+            ->orderBy('id', 'desc')
+            ->get();
+
         return view('admin.rooms.index', compact('rooms'));
     }
-
    public function approve($id)
 {
     // Lấy phòng kèm thông tin người đăng
@@ -54,11 +72,7 @@ class AdminRoomController extends Controller
         return view('admin.rooms.show', compact('room'));
     }
     
-public function users()
-{
-    $users = User::orderBy('id', 'desc')->get();
-    return view('admin.users.index', compact('users'));
-}
+
 
 public function deleteUser($id)
 {

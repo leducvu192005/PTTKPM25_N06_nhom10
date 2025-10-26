@@ -7,12 +7,19 @@
 <div class="container mt-5">
     <h2 class="mb-4">Danh sách người dùng</h2>
 
+    {{-- Thông báo --}}
     @if(session('danger'))
         <div class="alert alert-danger">{{ session('danger') }}</div>
     @endif
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+
+    {{-- Form tìm kiếm --}}
+    <form action="{{ route('admin.users.index') }}" method="GET" class="mb-3 d-flex" style="max-width:400px;">
+        <input type="text" name="keyword" value="{{ request('keyword') }}" class="form-control me-2" placeholder="Nhập tên người dùng...">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    </form>
 
     <div class="card shadow-sm p-3">
         <table class="table table-hover align-middle">

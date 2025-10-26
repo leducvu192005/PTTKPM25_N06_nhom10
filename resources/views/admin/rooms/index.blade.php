@@ -5,6 +5,7 @@
 @section('content')
     <h1 class="mb-4">🏠 Quản lý Phòng trọ</h1>
 
+    {{-- Thông báo --}}
     @if (session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @elseif (session('warning'))
@@ -12,6 +13,12 @@
     @elseif (session('danger'))
         <div class="alert alert-danger">{{ session('danger') }}</div>
     @endif
+
+    {{-- Form tìm kiếm --}}
+    <form action="{{ route('admin.rooms.index') }}" method="GET" class="mb-3 d-flex" style="max-width:400px;">
+        <input type="text" name="keyword" value="{{ request('keyword') }}" class="form-control me-2" placeholder="Nhập tên phòng hoặc tiêu đề...">
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+    </form>
 
     <table class="table table-striped">
         <thead class="table-dark">
