@@ -21,7 +21,7 @@
            <div class="col-md-4">
     <select class="form-select" name="type">
         <option value="">Loại phòng</option>
-        <option value="chung-cu" {{ request('type') == 'nha-nguyen-can' ? 'selected' : '' }}>Nhà nguyên căn</option>
+        <option value="nha-nguyen-can" {{ request('type') == 'nha-nguyen-can' ? 'selected' : '' }}>Nhà nguyên căn</option>
         <option value="chung-cu-mini" {{ request('type') == 'chung-cu-mini' ? 'selected' : '' }}>Chung cư mini</option>
         <option value="phong-tro" {{ request('type') == 'phong-tro' ? 'selected' : '' }}>Phòng trọ</option>
     </select>
@@ -87,6 +87,27 @@
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: rgba(0,0,0,0.5);
+
 }
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Ảnh chiếm 65% chiều cao của card */
+.card-img-top {
+    height: 65%;
+    object-fit: cover; /* Giúp ảnh không bị méo */
+}
+
+/* Phần nội dung chiếm phần còn lại */
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* căn đều nội dung */
+}
+
 </style>
+
 @endpush

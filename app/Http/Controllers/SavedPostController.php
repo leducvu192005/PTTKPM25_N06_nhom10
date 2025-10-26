@@ -33,14 +33,17 @@ class SavedPostController extends Controller
     }
 
     // Xóa tin đã lưu
-    public function destroy($roomId)
-    {
-        SavedPost::where('user_id', Auth::id())
-            ->where('room_id', $roomId)
-            ->delete();
+  
+public function destroy($id)
+{
+    $saved = SavedPost::where('id', $id)
+        ->where('user_id', Auth::id())
+        ->firstOrFail();
 
-        return back()->with('success', 'Đã bỏ lưu tin.');
-    }
+    $saved->delete();
+
+    return back()->with('success', 'Đã bỏ lưu tin.');
+}
 
     // Trang tin đã lưu
     public function index()

@@ -10,7 +10,7 @@
         <h5 class="fw-bold">Liên kết nhanh</h5>
         <ul class="list-unstyled">
           <li><a href="{{ route('listings.index') }}" class="text-light text-decoration-none">Danh sách phòng</a></li>
-          <li><a href="{{ route('listings.create') }}" class="text-light text-decoration-none">Đăng tin</a></li>
+          <li><a href="{{ route('rooms.create') }}" class="text-light text-decoration-none">Đăng tin</a></li>
           <li><a href="{{ route('login') }}" class="text-light text-decoration-none">Đăng nhập</a></li>
         </ul>
       </div>

@@ -11,7 +11,8 @@
         <p><strong>Giá:</strong> {{ number_format($room->price) }} VND</p>
         <p><strong>Mô tả:</strong> {{ $room->description }}</p>
         <p><strong>Trạng thái:</strong> {{ $room->status }}</p>
-        <img src="{{ asset($room->image_path) }}" alt="Ảnh phòng" width="400">
+        <img src="{{ asset('storage/' . $room->image_path) }}" alt="Ảnh phòng" width="400">
+
     </div>
 </div>
 @endsection
