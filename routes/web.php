@@ -65,7 +65,10 @@ Route::middleware(['auth'])->group(function () {
        Route::get('/saved', [SavedPostController::class, 'index'])->name('saved.index');        // Xem tin đã lưu
     Route::post('/saved/{roomId}', [SavedPostController::class, 'store'])->name('saved.store'); // Lưu tin
     Route::delete('/saved/{roomId}', [SavedPostController::class, 'destroy'])->name('saved.destroy'); // Bỏ lưu
-   
+ // reivew
+   Route::post('/rooms/{room}/reviews', [\App\Http\Controllers\ReviewController::class, 'store'])
+    ->middleware('auth')
+    ->name('rooms.reviews.store');
 });
 
 

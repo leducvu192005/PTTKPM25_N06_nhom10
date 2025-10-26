@@ -106,13 +106,13 @@ class RoomController extends Controller
 
         return redirect()->route('rooms.index')->with('success', 'Phòng trọ đã được đăng thành công và đang chờ Admin phê duyệt.');
     }
+
     public function show($id)
 {
-    $room = Room::findOrFail($id); // Lấy dữ liệu phòng theo ID
+    $room = Room::with(['reviews.user'])->findOrFail($id);
     return view('rooms.show', compact('room'));
 }
 
-    
     // Các hàm show, edit, update, destroy (để user quản lý phòng của mình)
     // sẽ được bổ sung sau, nếu bạn cần.
 }

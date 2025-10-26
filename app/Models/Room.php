@@ -30,4 +30,9 @@ class Room extends Model
     public function images(){
         return $this->hasMany(RoomImage::class);
     }
+    public function reviews()
+{
+    return $this->hasMany(Review::class);
+}
+
 }

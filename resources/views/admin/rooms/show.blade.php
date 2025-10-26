@@ -14,5 +14,13 @@
         <img src="{{ asset('storage/' . $room->image_path) }}" alt="Ảnh phòng" width="400">
 
     </div>
+    <h4 class="text-lg font-semibold mt-6">Đánh giá người dùng</h4>
+@foreach ($room->reviews as $review)
+    <div class="border rounded p-3 mt-2">
+        <strong>{{ $review->user->name }}</strong> - ⭐ {{ $review->rating }}/5
+        <p>{{ $review->comment }}</p>
+    </div>
+@endforeach
+
 </div>
 @endsection

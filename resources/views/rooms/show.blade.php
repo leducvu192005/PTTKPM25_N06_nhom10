@@ -103,6 +103,86 @@ function changeMainImage(el) {
   Gọi ngay
 </a>
 @endif
+
+<!-- ===================== ĐÁNH GIÁ PHÒNG ===================== -->
+<div class="mt-10 border-t pt-6">
+    <h2 class="text-2xl font-semibold mb-4 text-blue-600" style="font-size: 24px";>      ⭐ Đánh giá phòng trọ</h2>
+
+    <!-- Danh sách đánh giá -->
+    @forelse ($room->reviews as $review)
+        <div class="border rounded-lg p-4 mb-3 bg-gray-50">
+            <div class="flex items-center justify-between">
+                <strong>{{ $review->user->name ?? 'Người dùng' }}</strong>
+                <span class="text-yellow-500">
+                    @for ($i = 1; $i <= 5; $i++)
+                        <i class="fa{{ $i <= $review->rating ? 's' : 'r' }} fa-star"></i>
+                    @endfor
+                </span>
+            </div>
+            <p class="mt-2 text-gray-700">{{ $review->comment }}</p>
+            <small class="text-gray-500">{{ $review->created_at->diffForHumans() }}</small>
+        </div>
+    @empty
+        <p class="text-gray-500">Chưa có đánh giá nào cho phòng này.</p>
+    @endforelse
+
+    <!-- Form gửi đánh giá -->
+ @auth
+<form action="{{ route('rooms.reviews.store', $room->id) }}" 
+      method="POST" 
+      class="mt-6 bg-white shadow-md rounded-lg p-6"
+      style="max-width: 600px;">
+    @csrf
+
+    <h3 class="text-lg font-semibold mb-6 text-gray-800" style="text-align: left; font-size: 24px;">
+        Gửi đánh giá của bạn
+    </h3>
+
+    {{-- Số sao --}}
+    <div class="flex items-center mb-4">
+        <label for="rating" 
+               class="text-sm font-medium" 
+               style="width: 100px; text-align: left; margin-right: 10px;">
+            Số sao:
+        </label>
+        <select name="rating" id="rating" 
+                class="border rounded px-3 py-2 w-32 focus:outline-none focus:ring focus:ring-blue-200"    style="text-align: left;">
+            <option value="5">5 sao</option>
+            <option value="4">4 sao</option>
+            <option value="3">3 sao</option>
+            <option value="2">2 sao</option>
+            <option value="1">1 sao</option>
+        </select>
+    </div>
+
+    {{-- Bình luận --}}
+    <div class="flex items-start mb-6">
+        <label for="comment" 
+               class="text-sm font-medium" 
+               style="width: 100px; text-align: left; margin-right: 20px; margin-top: 5px; margin-bottom: 10px;">
+            Bình luận:
+        </label>
+        <textarea name="comment" id="comment" rows="3"
+                  class="flex-1 border rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-200"
+                  style="  height: 60px;  width: 500px; margin-bottom: 15px;";
+                  placeholder="Viết cảm nhận của bạn..."></textarea>
+    </div>
+
+    {{-- Nút gửi --}}
+    <div class="flex items-center" >
+        <button type="submit" 
+                class="px-5 py-2 rounded border border-gray-400 hover:bg-gray-100 transition"
+                style="color: black; font-weight: 500; text-align:  left; margin-bottom: 15px;">
+            Gửi đánh giá
+        </button>
+    </div>
+</form>
+@else
+<p class="text-gray-600 mt-4">
+    <a href="{{ route('login') }}" class="text-blue-500 underline">Đăng nhập</a> để gửi đánh giá.
+</p>
+@endauth
+
   <!-- lưu tin-->
 @php
     use App\Models\SavedPost;
@@ -124,6 +204,7 @@ function changeMainImage(el) {
     </form>
 @endif
   </div>
+
 
 
 </div>
