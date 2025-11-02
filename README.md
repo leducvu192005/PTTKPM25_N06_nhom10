@@ -20,6 +20,8 @@ Fontend: Lê Đức Vũ
 
 Database/Tester: Nguyễn Thị Khánh Linh
 
+Slide thuyết trình: https://www.canva.com/design/DAG3izW26q0/DH1MmSsFCKI5hotQGsmjiw/view?utm_content=DAG3izW26q0&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h415a26abba
+
 ## 🚀 Tính năng chính
 
 - 🔍 Tìm kiếm phòng trọ theo:
